@@ -14,7 +14,9 @@
     "@google/genai": "^1.33.0",
     "lucide-react": "^0.559.0",
     "react-markdown": "^10.1.0",
-    "recharts": "^3.5.1"
+    "recharts": "^3.5.1",
+    "vite": "^7.2.7",
+    "@vitejs/plugin-react": "^5.1.2"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

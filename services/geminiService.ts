@@ -1,12 +1,11 @@
 import { GoogleGenAI } from "@google/genai";
 import { Transaction } from "../types";
 
-const apiKey = process.env.API_KEY || '';
-const ai = new GoogleGenAI({ apiKey });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const analyzeFinancialData = async (transactions: Transaction[]): Promise<string> => {
-  if (!apiKey) {
-    return "API Key tidak ditemukan. Mohon pastikan API Key Google Gemini sudah terkonfigurasi.";
+  if (!process.env.API_KEY) {
+    return "API Key tidak ditemukan. Mohon pastikan API Key Google Gemini sudah terkonfigurasi di Environment Variables.";
   }
 
   // Prepare data for the prompt
@@ -18,13 +17,14 @@ export const analyzeFinancialData = async (transactions: Transaction[]): Promise
     Saya memiliki data transaksi keuangan usaha berikut:
     ${transactionSummary}
 
-    Tolong bertindak sebagai penasihat keuangan bisnis. Lakukan analisis mendalam mengenai:
-    1. Performa setiap unit usaha (Menjahit, Las, Doorsmeer, Pangkas).
+    Tolong bertindak sebagai penasihat keuangan bisnis senior. Lakukan analisis mendalam mengenai:
+    1. Performa setiap unit usaha (Menjahit, Las, Doorsmeer, Pangkas, Pertanian, dll).
     2. Keseimbangan antara pemasukan dan pengeluaran operasional.
-    3. Identifikasi unit usaha yang paling menguntungkan dan yang perlu efisiensi.
-    4. Berikan 3 saran konkret untuk mengembangkan usaha ini.
+    3. Identifikasi unit usaha yang paling menguntungkan (sapi perah) dan yang perlu efisiensi.
+    4. KHUSUS untuk setiap unit usaha yang diidentifikasi menguntungkan, berikan strategi pemasaran kreatif atau langkah operasional yang spesifik (tailored) untuk meningkatkan omzet unit tersebut lebih jauh lagi.
+    5. Berikan 3 saran strategis umum untuk mengembangkan kesehatan finansial usaha ini secara keseluruhan.
     
-    Jawablah dalam Bahasa Indonesia dengan nada yang profesional, analitis, namun mudah dipahami. Gunakan format Markdown untuk struktur yang rapi.
+    Jawablah dalam Bahasa Indonesia dengan nada yang profesional, solutif, namun mudah dipahami. Gunakan format Markdown untuk struktur yang rapi.
   `;
 
   try {
